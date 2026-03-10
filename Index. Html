@@ -1,1 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Sons of Wine</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
 
+body{
+font-family:Arial;
+background:#111;
+color:white;
+text-align:center;
+margin:0;
+}
+
+header{
+padding:60px;
+background:black;
+}
+
+.wine{
+border:1px solid #333;
+margin:20px;
+padding:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>SONS OF WINE</h1>
+<p>Natural wine project – Farid Yahimi</p>
+</header>
+
+<div class="wine">
+<h2>Pinot Escobar</h2>
+<p>Pinot Noir – Alsace</p>
+</div>
+
+<div class="wine">
+<h2>Gamay Davidson</h2>
+<p>Gamay – Beaujolais</p>
+</div>
+
+<div class="wine">
+<h2>Soulographie</h2>
+<p>White field blend</p>
+</div>
+
+</body>
+</html>
