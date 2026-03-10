@@ -1,47 +1,473 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sons of Wine</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Caviste Pro — Réassort</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1209;
+    --parchment: #f5f0e8;
+    --cream: #faf7f2;
+    --wine: #7b1c2e;
+    --wine-light: #a83248;
+    --gold: #c9a84c;
+    --gold-light: #e8d49a;
+    --sage: #5a6b55;
+    --muted: #9a8e7e;
+    --border: #ddd5c4;
+    --card: #ffffff;
+  }
 
-<link rel="stylesheet" href="style.css">
-</head>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
-<body>
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    max-width: 430px;
+    margin: 0 auto;
+    position: relative;
+    overflow-x: hidden;
+  }
 
-<header>
-<h1>SONS OF WINE</h1>
-<p>Natural wine project</p>
-</header>
+  /* HEADER */
+  .app-header {
+    background: var(--ink);
+    color: var(--parchment);
+    padding: 20px 20px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 4px;
+  }
+  .logo {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    line-height: 1;
+  }
+  .logo span { color: var(--gold); font-style: italic; }
+  .header-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .notif-btn {
+    background: none;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--parchment);
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .notif-dot {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: absolute;
+    top: 4px; right: 4px;
+  }
 
-<nav>
-<a href="index.html">PROJECT</a>
-<a href="author.html">AUTHOR</a>
-<a href="wines.html">WINES</a>
-<a href="contact.html">CONTACT</a>
-</nav>
+  /* NAV */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 100%; max-width: 430px;
+    background: var(--ink);
+    display: flex;
+    z-index: 100;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-item {
+    flex: 1;
+    padding: 10px 4px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    color: var(--muted);
+    transition: color 0.2s;
+    background: none;
+    border: none;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nav-item.active { color: var(--gold); }
+  .nav-icon { font-size: 20px; line-height: 1; }
+  .nav-badge {
+    background: var(--wine);
+    color: white;
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 8px;
+    position: absolute;
+    top: 6px;
+    right: calc(50% - 26px);
+    font-family: 'DM Mono', monospace;
+  }
+  .nav-item { position: relative; }
 
-<section>
+  /* PAGES */
+  .page { display: none; padding: 0 0 90px; }
+  .page.active { display: block; }
 
-<h2>The Project</h2>
+  /* SECTION TITLE */
+  .section-title {
+    padding: 20px 20px 12px;
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .section-title em { font-style: italic; color: var(--wine); }
 
-<p>
-Sons of Wine is an independent natural wine project.
-Small production cuvées are produced from organically
-grown grapes sourced from different terroirs.
-</p>
+  /* SEARCH BAR */
+  .search-bar {
+    margin: 0 20px 16px;
+    display: flex;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    align-items: center;
+    padding: 0 14px;
+    gap: 8px;
+  }
+  .search-bar input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    padding: 12px 0;
+    background: transparent;
+    color: var(--ink);
+  }
+  .search-bar input::placeholder { color: var(--muted); }
+  .search-bar .search-icon { color: var(--muted); font-size: 16px; }
 
-<p>
-Vinification follows minimal intervention principles:
-indigenous yeasts, no filtration and very limited sulfur.
-</p>
+  /* FILTER CHIPS */
+  .filter-chips {
+    display: flex;
+    gap: 8px;
+    padding: 0 20px 16px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .filter-chips::-webkit-scrollbar { display: none; }
+  .chip {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+  .chip.active {
+    background: var(--wine);
+    color: white;
+    border-color: var(--wine);
+  }
 
-</section>
+  /* WINE CARDS */
+  .wine-list { padding: 0 16px; display: flex; flex-direction: column; gap: 12px; }
+  .wine-card {
+    background: white;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .wine-card:active { transform: scale(0.98); }
+  .wine-color-bar { width: 5px; flex-shrink: 0; }
+  .rouge { background: linear-gradient(180deg, #8b1a2e, #5c1020); }
+  .blanc { background: linear-gradient(180deg, #d4b96a, #b8953a); }
+  .rosé { background: linear-gradient(180deg, #e8a0a0, #d46e7e); }
+  .petillant { background: linear-gradient(180deg, #a0c4e8, #6a9bc2); }
 
-<footer>
-© Sons of Wine
-</footer>
+  .wine-info { flex: 1; padding: 14px 14px 12px; }
+  .wine-appellation {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2px;
+  }
+  .wine-name { font-size: 17px; font-weight: 600; line-height: 1.2; margin-bottom: 2px; }
+  .wine-domaine { font-size: 13px; font-style: italic; color: var(--muted); margin-bottom: 8px; }
+  .wine-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  .wine-price { font-size: 18px; font-weight: 600; color: var(--ink); }
+  .wine-price span { font-size: 12px; font-weight: 300; color: var(--muted); }
+  .stock-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 6px;
+  }
+< truncated lines 237-771 >
+      <div class="hc-date">20 décembre 2024</div>
+      <div class="hc-items">Bordeaux Grands Crus…</div>
+    </div>
+    <div class="hc-right">
+      <div class="hc-amount">4 200 €</div>
+      <div class="hc-arrow">›</div>
+    </div>
+  </div>
+</div>
 
+<!-- CART BAR -->
+<div class="cart-bar hidden" id="cart-bar" onclick="goTo('commande')">
+  <div class="cart-bar-left">
+    <span class="cart-bar-qty" id="cart-bar-qty">0 article</span>
+    <span class="cart-bar-label">Voir ma commande →</span>
+  </div>
+  <span class="cart-bar-total" id="cart-bar-total">0 €</span>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="nav-item active" id="nav-catalogue" onclick="goTo('catalogue')">
+    <span class="nav-icon">🍷</span>Catalogue
+  </button>
+  <button class="nav-item" id="nav-commande" onclick="goTo('commande')">
+    <span class="nav-icon">🛒</span>Commande
+    <span class="nav-badge" id="cart-badge" style="display:none">0</span>
+  </button>
+  <button class="nav-item" id="nav-suivi" onclick="goTo('suivi')">
+    <span class="nav-icon">📦</span>Suivi
+  </button>
+  <button class="nav-item" id="nav-historique" onclick="goTo('historique')">
+    <span class="nav-icon">📋</span>Historique
+  </button>
+</div>
+
+<!-- MODAL CONFIRMATION -->
+<div class="modal-overlay" id="modal-confirm">
+  <div class="modal-sheet">
+    <div class="modal-handle"></div>
+    <div id="modal-content-pre">
+      <div class="modal-title">Confirmer la <em>commande</em></div>
+      <div class="modal-sub">Millésime Distribution vous livrera sous 48h</div>
+      <div class="modal-info">
+        <div class="modal-info-row">
+          <span class="label">Nombre d'articles</span>
+          <span id="modal-articles">—</span>
+        </div>
+        <div class="modal-info-row">
+          <span class="label">Montant total HT</span>
+          <span id="modal-total">—</span>
+        </div>
+        <div class="modal-info-row">
+          <span class="label">Livraison estimée</span>
+          <span>48h • Paris</span>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="confirmOrder()">✓ Confirmer</button>
+      <button class="btn-secondary" onclick="closeModal()">Annuler</button>
+    </div>
+    <div id="modal-content-post" style="display:none; text-align:center;">
+      <div class="modal-check">🎉</div>
+      <div class="modal-title" style="text-align:center">Commande <em>envoyée</em> !</div>
+      <div class="modal-sub" style="text-align:center; margin-bottom:24px">Vous recevrez une confirmation par email.<br>Livraison dans 48h.</div>
+      <button class="btn-primary" onclick="afterConfirm()">Suivre ma commande →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const wines = [
+  { id:1, name:"Gevrey-Chambertin 1er Cru", domaine:"Domaine Rossignol-Trapet", appellation:"Bourgogne", type:"Rouge", color:"rouge", price:48, stock:24, promo:false },
+  { id:2, name:"Puligny-Montrachet", domaine:"Maison Louis Jadot", appellation:"Bourgogne", type:"Blanc", color:"blanc", price:55, stock:6, promo:false },
+  { id:3, name:"Bandol Rosé", domaine:"Château Pibarnon", appellation:"Provence", type:"Rosé", color:"rosé", price:22, stock:48, promo:true },
+  { id:4, name:"Champagne Brut Millésimé", domaine:"Gosset Grande Réserve", appellation:"Champagne", type:"Pétillant", color:"petillant", price:62, stock:0, promo:false },
+  { id:5, name:"Saint-Émilion Grand Cru", domaine:"Château Figeac", appellation:"Bordeaux", type:"Rouge", color:"rouge", price:95, stock:12, promo:false },
+  { id:6, name:"Sancerre Blanc", domaine:"Henri Bourgeois", appellation:"Loire", type:"Blanc", color:"blanc", price:28, stock:36, promo:true },
+  { id:7, name:"Côtes de Provence", domaine:"Minuty M de Minuty", appellation:"Provence", type:"Rosé", color:"rosé", price:18, stock:60, promo:false },
+  { id:8, name:"Crémant d'Alsace", domaine:"Wolfberger", appellation:"Alsace", type:"Pétillant", color:"petillant", price:14, stock:30, promo:true },
+];
+
+let cart = {};
+let currentFilter = 'Tous';
+let searchQuery = '';
+
+function stockLabel(q) {
+  if (q === 0) return { cls: 'stock-out', txt: 'Épuisé' };
+  if (q <= 12) return { cls: 'stock-low', txt: `${q} rest.` };
+  return { cls: 'stock-ok', txt: `${q} en stock` };
+}
+
+function renderCatalogue() {
+  const list = document.getElementById('wine-list');
+  let filtered = wines.filter(w => {
+    const matchFilter = currentFilter === 'Tous' || w.type === currentFilter || (currentFilter === 'Promo' && w.promo);
+    const matchSearch = w.name.toLowerCase().includes(searchQuery) || w.domaine.toLowerCase().includes(searchQuery);
+    return matchFilter && matchSearch;
+  });
+  list.innerHTML = filtered.map(w => {
+    const s = stockLabel(w.stock);
+    const qty = cart[w.id] || 0;
+    return `<div class="wine-card" data-id="${w.id}">
+      <div class="wine-color-bar ${w.color}"></div>
+      <div class="wine-info">
+        <div class="wine-appellation">${w.appellation}${w.promo ? ' · 🏷️ Promo' : ''}</div>
+        <div class="wine-name">${w.name}</div>
+        <div class="wine-domaine">${w.domaine}</div>
+        <div class="wine-meta">
+          <div class="wine-price">${w.price} €<span>/bt</span></div>
+          <span class="stock-badge ${s.cls}">${s.txt}</span>
+        </div>
+      </div>
+      <div class="wine-actions">
+        <div class="qty-ctrl">
+          <button class="qty-btn" onclick="changeQty(${w.id}, -1)" ${qty === 0 ? 'style="opacity:0.3"' : ''}>−</button>
+          <span class="qty-val" id="qty-${w.id}">${qty}</span>
+          <button class="qty-btn" onclick="changeQty(${w.id}, 1)" ${w.stock === 0 ? 'disabled style="opacity:0.3"' : ''}>+</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('') || '<div class="empty-state"><div class="empty-icon">🔍</div><div class="empty-title">Aucun résultat</div><div class="empty-sub">Essayez un autre filtre</div></div>';
+}
+
+function changeQty(id, delta) {
+  const wine = wines.find(w => w.id === id);
+  const cur = cart[id] || 0;
+  const next = Math.max(0, Math.min(cur + delta, wine.stock));
+  if (next === 0) delete cart[id]; else cart[id] = next;
+  document.getElementById(`qty-${id}`).textContent = next;
+  const btn = document.querySelector(`[data-id="${id}"] .qty-btn`);
+  updateCartUI();
+}
+
+function updateCartUI() {
+  const total = Object.entries(cart).reduce((s, [id, q]) => s + wines.find(w => w.id == id).price * q, 0);
+  const count = Object.values(cart).reduce((s, q) => s + q, 0);
+  const bar = document.getElementById('cart-bar');
+  const badge = document.getElementById('cart-badge');
+  document.getElementById('cart-bar-qty').textContent = `${count} article${count > 1 ? 's' : ''}`;
+  document.getElementById('cart-bar-total').textContent = `${total.toLocaleString('fr-FR')} €`;
+  document.getElementById('cart-bar-qty').textContent = `${count} article${count > 1 ? 's' : ''}`;
+  if (count > 0) {
+    bar.classList.remove('hidden');
+    badge.style.display = 'inline';
+    badge.textContent = count;
+  } else {
+    bar.classList.add('hidden');
+    badge.style.display = 'none';
+  }
+}
+
+function renderCart() {
+  const list = document.getElementById('cart-items-list');
+  const bottom = document.getElementById('commande-bottom');
+  const entries = Object.entries(cart);
+  if (entries.length === 0) {
+    list.innerHTML = `<div class="empty-state"><div class="empty-icon">🛒</div><div class="empty-title">Panier vide</div><div class="empty-sub">Ajoutez des vins depuis le catalogue</div></div>`;
+    bottom.style.display = 'none';
+    return;
+  }
+  let total = 0;
+  list.innerHTML = entries.map(([id, qty]) => {
+    const w = wines.find(w => w.id == id);
+    const sub = w.price * qty;
+    total += sub;
+    return `<div class="order-item">
+      <div class="oi-left">
+        <div class="oi-name">${w.name}</div>
+        <div class="oi-detail">${w.domaine}</div>
+      </div>
+      <div class="oi-right">
+        <div class="oi-qty">${qty} × ${w.price} €</div>
+        <div class="oi-price">${sub} €</div>
+      </div>
+    </div>`;
+  }).join('');
+  document.getElementById('cart-total-display').textContent = `${total.toLocaleString('fr-FR')} €`;
+  bottom.style.display = 'block';
+}
+
+function setFilter(f, el) {
+  currentFilter = f;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderCatalogue();
+}
+
+function filterWines(q) {
+  searchQuery = q.toLowerCase();
+  renderCatalogue();
+}
+
+function goTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(`page-${page}`).classList.add('active');
+  document.getElementById(`nav-${page}`).classList.add('active');
+  if (page === 'commande') renderCart();
+}
+
+function showConfirm() {
+  const count = Object.values(cart).reduce((s, q) => s + q, 0);
+  const total = Object.entries(cart).reduce((s, [id, q]) => s + wines.find(w => w.id == id).price * q, 0);
+  document.getElementById('modal-articles').textContent = `${count} bouteille${count > 1 ? 's' : ''}`;
+  document.getElementById('modal-total').textContent = `${total.toLocaleString('fr-FR')} €`;
+  document.getElementById('modal-content-pre').style.display = 'block';
+  document.getElementById('modal-content-post').style.display = 'none';
+  document.getElementById('modal-confirm').classList.add('show');
+}
+
+function confirmOrder() {
+  document.getElementById('modal-content-pre').style.display = 'none';
+  document.getElementById('modal-content-post').style.display = 'block';
+}
+
+function afterConfirm() {
+  cart = {};
+  updateCartUI();
+  renderCatalogue();
+  closeModal();
+  goTo('suivi');
+}
+
+function closeModal() {
+  document.getElementById('modal-confirm').classList.remove('show');
+}
+
+function showNotif() {
+  alert('🔔 Notification : Votre commande #CMD-089 est en transit !');
+}
+
+// Init
+renderCatalogue();
+</script>
 </body>
 </html>
