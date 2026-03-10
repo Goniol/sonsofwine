@@ -3,59 +3,189 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sons of Wine</title>
 
 <style>
+
 body{
 margin:0;
 font-family:Arial, Helvetica, sans-serif;
-background:#111;
+background:#0f0f0f;
 color:white;
-text-align:center;
+line-height:1.6;
 }
 
 header{
 background:black;
-padding:60px 20px;
+text-align:center;
+padding:70px 20px;
+border-bottom:1px solid #222;
+}
+
+header h1{
+margin:0;
+letter-spacing:4px;
+font-size:42px;
+}
+
+nav{
+background:#111;
+text-align:center;
+padding:15px;
+}
+
+nav a{
+color:white;
+margin:0 20px;
+text-decoration:none;
+font-size:14px;
+letter-spacing:2px;
 }
 
 section{
-max-width:900px;
+max-width:1000px;
 margin:auto;
-padding:40px 20px;
+padding:60px 20px;
 }
 
-.wine{
+h2{
+letter-spacing:2px;
+margin-bottom:20px;
+}
+
+.wines{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+}
+
+.card{
+background:#161616;
 border:1px solid #333;
-margin:20px;
 padding:20px;
-background:#1a1a1a;
 }
 
 footer{
-padding:30px;
+text-align:center;
+padding:40px;
+border-top:1px solid #222;
 color:#777;
 }
+
 </style>
+
 </head>
 
 <body>
 
 <header>
+
 <h1>SONS OF WINE</h1>
 <p>Natural wine project – Farid Yahimi</p>
+
 </header>
 
-<section>
+<nav>
+
+<a href="#project">PROJECT</a>
+<a href="#farid">FARID YAHIMI</a>
+<a href="#wines">WINES</a>
+<a href="#contact">CONTACT</a>
+
+</nav>
+
+<section id="project">
 
 <h2>The Project</h2>
 
 <p>
-Sons of Wine is a natural wine project based in France.
-The wines are produced from organically grown grapes and
-vinified with minimal intervention.
+Sons of Wine is a natural wine project founded by Farid Yahimi.
+The wines are produced from organic or biodynamic grapes sourced
+from different terroirs and vinified with minimal intervention.
 </p>
 
-<div class="wine">
+<p>
+Fermentation with indigenous yeasts, no filtration and minimal sulfur.
+Each cuvée is produced in small quantities.
+</p>
+
+</section>
+
+<section id="farid">
+
+<h2>Farid Yahimi</h2>
+
+<p>
+Farid Yahimi is a French natural wine maker originally from Lorraine.
+After a career in digital technology he turned toward natural wine
+and began producing experimental micro-cuvées under the label
+Sons of Wine.
+</p>
+
+<p>
+The project is based on the idea of a free winemaker sourcing
+organic grapes and creating wines without technological manipulation.
+</p>
+
+</section>
+
+<section id="wines">
+
+<h2>Selected Wines</h2>
+
+<div class="wines">
+
+<div class="card">
 <h3>Pinot Escobar</h3>
-<p>Pinot Noir</p>
+<p>Pinot Noir – Alsace</p>
+</div>
+
+<div class="card">
+<h3>Gamay Davidson</h3>
+<p>Gamay – Beaujolais</p>
+</div>
+
+<div class="card">
+<h3>Soulographie</h3>
+<p>White field blend</p>
+</div>
+
+<div class="card">
+<h3>Perception</h3>
+<p>Muscat / Riesling</p>
+</div>
+
+<div class="card">
+<h3>Magic Stick</h3>
+<p>Pet-Nat – Gewurztraminer / Riesling</p>
+</div>
+
+<div class="card">
+<h3>Bisous Bisous</h3>
+<p>Riesling / Gewurztraminer</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="contact">
+
+<h2>Contact</h2>
+
+<p>
+Professional inquiries<br>
+Email : contact@sonsofwine.com
+</p>
+
+</section>
+
+<footer>
+
+© Sons of Wine
+
+</footer>
+
+</body>
+</html>
